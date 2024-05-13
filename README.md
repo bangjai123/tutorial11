@@ -33,3 +33,8 @@ Dari ketiga gambar di atas, dapat dilihat bahwa sebelum diexpose, service belum 
   Hal ini sekaligus mengilustrasikan jawaban dari pertanyaan sebelumnya, kenapa pods yang telah dibuat secara eksplisit tidak muncul pada perintah `kubectl get pods,services -n kube-system`. Yaitu karena pod tersebut tidak berada pada name space kube-system
 
 </details>
+
+# Refleksi Rolling Update Deployment
+<details>
+  <summary></summary>
+</details>
