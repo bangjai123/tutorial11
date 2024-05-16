@@ -36,5 +36,38 @@ Dari ketiga gambar di atas, dapat dilihat bahwa sebelum diexpose, service belum 
 
 # Refleksi Rolling Update Deployment
 <details>
-  <summary></summary>
+  <summary>Perbedaan rolling update dengan recreate deployment strategy</summary>
+
+   Kedua strategi di atas merupakan strategi deployment yang dapat dilakukan untuk mendeploy aplikasi. Perbedaan utama antara keduanya adalah bagaimana update akan dihandle. Pada _**rolling update**_, versi baru dari aplikasi menggantikan versi lama secara bertahap. Hal ini dilakukan dengan memutar pod-pod yang menjalankan aplikasi secara satu persatu. Dengan demikian, tidak ada downtime yang terjadi pada strategi ini saat dilakukan update deployment. Di sisi lain, _**Recreate deployment**_ dilakukan dengan mematikan pod terlebih dahulu, kemudian dijalankan versi yang terbaru. Hal tersebut dapat menyebabkan downtime saat update dilakukan. Meskipun demikian, cara ini relatif lebih mudah dilakukan dari pada strategi _rolling update_.
+   
+</details>
+
+<details>
+  <summary>Contoh implementasi recreate deployment strategy</summary>
+</details>
+
+<details>
+  <summary>Membuat manifest file untuk recreate deployment strategy</summary>
+</details>
+
+<details>
+  <summary>Kelebihan penggunaan manifest file</summary>
+
+  Manifest files adalah file yang digunakan untuk mendefinisikan konfigurasi dan deployment aplikasi. Terdapat beberapa kelebihan yang mungkin didapatkan dengan menggunakan manifest file dibanding deployment secara manual. Beberapa kelebihan tersebut di antaranya adalah sebagai berikut.
+
+  1. Automasi
+     Kita dapat menggunakan manifest file dalam CI/CD.
+       
+  2. Konsistensi
+     Dengan menggunakan manifest file, konfigurasi yang sama dapat diterapkan berkali-kali sehingga dapat mengurangi faktor kesalahan manusia.
+     
+  3. Dapat digunakan berkali-kali
+     Dengan menyimpan manifest file, kita dapat melakukan deployment yang sama berkali-kali tanpa mengulangi langkah yang sama berulang-ulang.
+     
+  4. Dokumentasi
+     Manifest file dapat berfungsi sebagai dokumentasi tentang konfigurasi dan infrasktruktur aplikasi.
+
+  5. Version control
+     Dengan menyimpan manifest file ke sistem _version control_, kita dapat melakukan _tracing_ terhadap perubahan yang terjadi. Dengan demikian, kita dapat mengembalikan ke versi yang lebih baik jika diperlukan.  
+     
 </details>
