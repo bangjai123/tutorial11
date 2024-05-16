@@ -69,6 +69,7 @@ menjadi
   strategy:
     type: Recreate
 ```
+pada file deployment.yaml. Hasil filenya dapat diliha pada direktori `recreate deployment strategy` pada repository ini.
 </details>
 
 <details>
