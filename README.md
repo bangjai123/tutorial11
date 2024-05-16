@@ -57,14 +57,18 @@ Dari ketiga gambar di atas, dapat dilihat bahwa sebelum diexpose, service belum 
   <summary>Membuat manifest file untuk recreate deployment strategy</summary>
 
   Yaml file untuk metode ini dapat diperoleh dengan pertama-tama mengeksekusi command `kubectl get deployments/spring-petclinic-rest -o yaml > <nama_file>.yaml` dan `kubectl get services/spring-petclinic-rest -o yaml > <nama_file>.yaml`. Selanjutnya, kita perlu mengubah 
-  `strategy:
+  ```
+  strategy:
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
-    type: RollingUpdate`
+    type: RollingUpdate
+```
 menjadi 
-  `strategy:
-    type: Recreate`
+```
+  strategy:
+    type: Recreate
+```
 </details>
 
 <details>
