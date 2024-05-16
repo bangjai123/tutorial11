@@ -48,9 +48,22 @@ Dari ketiga gambar di atas, dapat dilihat bahwa sebelum diexpose, service belum 
   Untuk melakukan implementasi ini, terdapat tiga tahapan yang perlu dilalui. Ketiga tahapan ini adalah 1) scale down deployment saat ini, 2) update deployment, 3) scale up deployment yang telah dilakukan. Hal ini saya lakukan sebagai berikut.
 
   1. Kondisi mula-mula (terdapat 4 pods dengan versi 3.0.2)
+     <img width="472" alt="image" src="https://github.com/bangjai123/tutorial11/assets/120235144/3beb5ccc-3d59-4c72-a96f-6c0f0d186370">
+
+     ![image](https://github.com/bangjai123/tutorial11/assets/120235144/8416fd0b-6467-4d38-bcf3-bbf2f68c5e92)
+
+
   2. Scale down ke 0 pods (mematikan pods yang aktif)
-  3. Melakukan update ke versi 3.2.1
-  4. Scale up ke 4 pods (menyalakan kembali layanan)
+     ![image](https://github.com/bangjai123/tutorial11/assets/120235144/c773b8ca-0313-4d43-8f55-43bdff1155a1)
+
+  3. Melakukan update ke versi yang diinginkan (di sini saya memilih 3.2.1)
+     ![image](https://github.com/bangjai123/tutorial11/assets/120235144/bdafa5f7-938b-4f3e-a7a5-abbb07cb4062)
+     ![image](https://github.com/bangjai123/tutorial11/assets/120235144/05229f7e-509f-4659-bbf2-7f7777e3d0e1)
+     ![image](https://github.com/bangjai123/tutorial11/assets/120235144/c029d1a4-4909-4b89-83ad-e593df9d9cca)
+     
+  4. Scale up ke jumlah pods yang diinginkan (di sini saya memilih 4) (menyalakan kembali layanan)
+     ![image](https://github.com/bangjai123/tutorial11/assets/120235144/0c6cb6d7-0fab-4374-845d-15087fe43dc6)
+
 </details>
 
 <details>
