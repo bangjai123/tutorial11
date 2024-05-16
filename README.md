@@ -44,10 +44,27 @@ Dari ketiga gambar di atas, dapat dilihat bahwa sebelum diexpose, service belum 
 
 <details>
   <summary>Contoh implementasi recreate deployment strategy</summary>
+
+  Untuk melakukan implementasi ini, terdapat tiga tahapan yang perlu dilalui. Ketiga tahapan ini adalah 1) scale down deployment saat ini, 2) update deployment, 3) scale up deployment yang telah dilakukan. Hal ini saya lakukan sebagai berikut.
+
+  1. Kondisi mula-mula (terdapat 4 pods dengan versi 3.0.2)
+  2. Scale down ke 0 pods (mematikan pods yang aktif)
+  3. Melakukan update ke versi 3.2.1
+  4. Scale up ke 4 pods (menyalakan kembali layanan)
 </details>
 
 <details>
   <summary>Membuat manifest file untuk recreate deployment strategy</summary>
+
+  Yaml file untuk metode ini dapat diperoleh dengan pertama-tama mengeksekusi command `kubectl get deployments/spring-petclinic-rest -o yaml > <nama_file>.yaml` dan `kubectl get services/spring-petclinic-rest -o yaml > <nama_file>.yaml`. Selanjutnya, kita perlu mengubah 
+  `strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate`
+menjadi 
+  `strategy:
+    type: Recreate`
 </details>
 
 <details>
