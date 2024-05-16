@@ -18,7 +18,7 @@ Dari ketiga gambar di atas, dapat dilihat bahwa sebelum diexpose, service belum 
 <details>
   <summary>The -n option</summary>
 
-  Pada kubctl, perintah get dengan opsi -n <name_space> artinya perintah get dilakukan pada name space <name_space>. Name space sendiri merupakan pengelompokkan objek kubernetes ke dalam unit yang terisolasi. Hal ini dapat mempermudah kita dalam melakukan manajemen terhadap _resources_ yang kita punya. 
+  Pada kubectl, perintah get dengan opsi -n <name_space> artinya perintah get dilakukan pada name space <name_space>. Name space sendiri merupakan pengelompokkan objek kubernetes ke dalam unit yang terisolasi. Hal ini dapat mempermudah kita dalam melakukan manajemen terhadap _resources_ yang kita punya. 
 
   Perintah `kubectl get pods,services -n kube-system` tidak menampilkan pods yang dibuat secara eksplisit karena pods yang telah dibuat secara eksplisit tidak berada pada name space `kube-system`. Padahal, perintah di atas spesifik melakukan get di name space `kube-system`. Name space `kube-system` digunakan untuk objek yang berkaitan dengan infrastruktur inti dari kluster.
   
@@ -36,5 +36,60 @@ Dari ketiga gambar di atas, dapat dilihat bahwa sebelum diexpose, service belum 
 
 # Refleksi Rolling Update Deployment
 <details>
-  <summary></summary>
+  <summary>Perbedaan rolling update dengan recreate deployment strategy</summary>
+
+   Kedua strategi di atas merupakan strategi deployment yang dapat dilakukan untuk mendeploy aplikasi. Perbedaan utama antara keduanya adalah bagaimana update akan dihandle. Pada _**rolling update**_, versi baru dari aplikasi menggantikan versi lama secara bertahap. Hal ini dilakukan dengan memutar pod-pod yang menjalankan aplikasi secara satu persatu. Dengan demikian, tidak ada downtime yang terjadi pada strategi ini saat dilakukan update deployment. Di sisi lain, _**Recreate deployment**_ dilakukan dengan mematikan pod terlebih dahulu, kemudian dijalankan versi yang terbaru. Hal tersebut dapat menyebabkan downtime saat update dilakukan. Meskipun demikian, cara ini relatif lebih mudah dilakukan dari pada strategi _rolling update_.
+   
+</details>
+
+<details>
+  <summary>Contoh implementasi recreate deployment strategy</summary>
+
+  Untuk melakukan implementasi ini, terdapat tiga tahapan yang perlu dilalui. Ketiga tahapan ini adalah 1) scale down deployment saat ini, 2) update deployment, 3) scale up deployment yang telah dilakukan. Hal ini saya lakukan sebagai berikut.
+
+  1. Kondisi mula-mula (terdapat 4 pods dengan versi 3.0.2)
+  2. Scale down ke 0 pods (mematikan pods yang aktif)
+  3. Melakukan update ke versi 3.2.1
+  4. Scale up ke 4 pods (menyalakan kembali layanan)
+</details>
+
+<details>
+  <summary>Membuat manifest file untuk recreate deployment strategy</summary>
+
+  Yaml file untuk metode ini dapat diperoleh dengan pertama-tama mengeksekusi command `kubectl get deployments/spring-petclinic-rest -o yaml > <nama_file>.yaml` dan `kubectl get services/spring-petclinic-rest -o yaml > <nama_file>.yaml`. Selanjutnya, kita perlu mengubah 
+  ```
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+```
+menjadi 
+```
+  strategy:
+    type: Recreate
+```
+pada file deployment.yaml. Hasil filenya dapat diliha pada direktori `recreate deployment strategy` pada repository ini.
+</details>
+
+<details>
+  <summary>Kelebihan penggunaan manifest file</summary>
+
+  Manifest files adalah file yang digunakan untuk mendefinisikan konfigurasi dan deployment aplikasi. Terdapat beberapa kelebihan yang mungkin didapatkan dengan menggunakan manifest file dibanding deployment secara manual. Beberapa kelebihan tersebut di antaranya adalah sebagai berikut.
+
+  1. Automasi
+     Kita dapat menggunakan manifest file dalam CI/CD.
+       
+  2. Konsistensi
+     Dengan menggunakan manifest file, konfigurasi yang sama dapat diterapkan berkali-kali sehingga dapat mengurangi faktor kesalahan manusia.
+     
+  3. Dapat digunakan berkali-kali
+     Dengan menyimpan manifest file, kita dapat melakukan deployment yang sama berkali-kali tanpa mengulangi langkah yang sama berulang-ulang.
+     
+  4. Dokumentasi
+     Manifest file dapat berfungsi sebagai dokumentasi tentang konfigurasi dan infrasktruktur aplikasi.
+
+  5. Version control
+     Dengan menyimpan manifest file ke sistem _version control_, kita dapat melakukan _tracing_ terhadap perubahan yang terjadi. Dengan demikian, kita dapat mengembalikan ke versi yang lebih baik jika diperlukan.  
+     
 </details>
