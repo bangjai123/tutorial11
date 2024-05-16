@@ -27,7 +27,7 @@ spec:
         app: spring-petclinic-rest
     spec:
       containers:
-      - image: docker.io/springcommunity/spring-petclinic-rest:3.0.2
+      - image: docker.io/springcommunity/spring-petclinic-rest:latest
         imagePullPolicy: IfNotPresent
         name: spring-petclinic-rest
         resources: {}
