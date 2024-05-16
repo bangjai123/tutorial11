@@ -18,7 +18,7 @@ Dari ketiga gambar di atas, dapat dilihat bahwa sebelum diexpose, service belum 
 <details>
   <summary>The -n option</summary>
 
-  Pada kubctl, perintah get dengan opsi -n <name_space> artinya perintah get dilakukan pada name space <name_space>. Name space sendiri merupakan pengelompokkan objek kubernetes ke dalam unit yang terisolasi. Hal ini dapat mempermudah kita dalam melakukan manajemen terhadap _resources_ yang kita punya. 
+  Pada kubectl, perintah get dengan opsi -n <name_space> artinya perintah get dilakukan pada name space <name_space>. Name space sendiri merupakan pengelompokkan objek kubernetes ke dalam unit yang terisolasi. Hal ini dapat mempermudah kita dalam melakukan manajemen terhadap _resources_ yang kita punya. 
 
   Perintah `kubectl get pods,services -n kube-system` tidak menampilkan pods yang dibuat secara eksplisit karena pods yang telah dibuat secara eksplisit tidak berada pada name space `kube-system`. Padahal, perintah di atas spesifik melakukan get di name space `kube-system`. Name space `kube-system` digunakan untuk objek yang berkaitan dengan infrastruktur inti dari kluster.
   
